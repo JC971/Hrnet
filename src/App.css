@@ -19,33 +19,51 @@ body {
 }
 
 h1 {
-	color: blue;
-	font-size: 3.2em;
+	color: #000000;
+	font-size: 32px;
 	line-height: 1.1;
+	text-align: center;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: left;
 	justify-content: center;
-	height: 100vh;
 }
 
 form {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: left;
 	justify-content: center;
 	border: solid red 3px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 290px;
 }
 input {
-	margin: 8px;
+	margin:10px 8px;
+	height: 20.17px;
+	width: 60%;
+	
 }
+input
 label {
 	display: block;
 	margin-top: 1rem;
 	margin-bottom: 10px;
+	
+}
+.label-firstName,
+.label-lastName,
+.label-dateOfBirth,
+.label-startDate {
+	font-size: 16px;
+	font-family: "Times New Roman", Times, serif;
+	margin: 16px 10px;
+
+	
 }
 
 .address {
@@ -66,7 +84,6 @@ label {
 }
 
 .modal-content {
-	
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -76,7 +93,6 @@ label {
 	position: relative;
 	width: 500px;
 	height: 400px;
-	
 }
 
 .modal-content button {
@@ -89,7 +105,6 @@ label {
 	cursor: pointer;
 	border-radius: 5px;
 	color: red;
-	
 }
 
 button {
@@ -111,6 +126,29 @@ button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
+
+.style-datePicker{
+	
+	text-align: center;
+}
+.react-datepicker{
+	position:relative
+}
+.react-datepicker__calendar-icon{
+	position:absolute;
+	right: 65px;
+	top: 5px;
+}
+.nav-link{
+	text-align: center;
+	margin: 20px 0;
+	text-decoration: none;
+}
+
+a.nav-link{
+	font-size: 16px;
+}
+
 
 @media (prefers-color-scheme: light) {
 	:root {

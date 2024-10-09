@@ -4,48 +4,41 @@ import Calendar from "../components/Calendar";
 import { optionsDepartements } from "../data/departments";
 import { states } from "../data/states";
 import Modale from "../modale";
+import { useEmployeeStore } from "../store/useEmployeeStore";
+import { NavLink } from "react-router-dom";
 
 export const FormEmployee = () => {
-	// Utilisation de useState pour gérer l'état des champs du formulaire
-	const [formData, setFormData] = useState({
-		firstName: "",
-		lastName: "",
-		dateOfBirth: "",
-		startDate: new Date(),
-		department: "",
-		street: "",
-		city: "",
-		state: "",
-		zipCode: "",
-	});
-	const [employees, setEmployees] = useState(() => {
-		const savedEmployees = localStorage.getItem("employees");
-		return savedEmployees ? JSON.parse(savedEmployees) : [];
-	});
-	const [showModal, setShowModal] = useState(false);
+	const { updateNewEmployee, addEmployee, newEmployee } = useEmployeeStore();
+	const [dateOfBirth, setDateOfBirth] = useState(null);
+	const [startDate, setStartDate] = useState(null);
+	//const [error, setError] = useState('');
 
-	// changements dans les champs du formulaire
 	const handleChange = (event) => {
 		const { name, value } = event.target;
-		setFormData((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
+
+		updateNewEmployee(name, value);
 	};
 
-	// la date
-	const handleDateChange = (date) => {
-		setFormData((prevState) => ({
-			...prevState,
-			startDate: date,
-		}));
+	const handleSelectChange = (field, value) => {
+		updateNewEmployee(field, value.value);
+	};
+
+	const [showModal, setShowModal] = useState(false);
+
+	const handleDateChange = (field, date) => {
+		if (field === "dateOfBirth") {
+			setDateOfBirth(date);
+		} else {
+			setStartDate(date);
+		}
+		updateNewEmployee(field, date);
 	};
 
 	// Sauvegarder un nouvel employé dans localStorage
 	const saveEmployee = () => {
-		const newEmployees = [...employees, formData];
-		setEmployees(newEmployees);
-		localStorage.setItem("employees", JSON.stringify(newEmployees));
+		// TODO check error
+
+		addEmployee(newEmployee);
 		setShowModal(true); //ouverture de la modale après enreg
 	};
 
@@ -53,58 +46,60 @@ export const FormEmployee = () => {
 		setShowModal(false);
 	};
 
-	console.log({ optionsDepartements });
-
 	// TODO ajouter le lien vers la page de la liste
 
 	return (
 		<div className="container">
 			<h1>HRnet</h1>
+			{/*ICI LIEN */}
+			<NavLink to="/list" className="nav-link">
+				Tableau des employees
+			</NavLink>
 
 			<form>
-				<input
-					name="firstName"
-					value={formData.firstName}
-					onChange={handleChange}
-					placeholder="First Name"
-				/>
+				<label className="label-firstName" htmlFor="firstName">
+					First Name
+				</label>
+				<input name="firstName" onChange={handleChange} placeholder="" />
+				<label className="label-lastName" htmlFor="lastName">
+					Prénom
+				</label>
 				<input
 					name="lastName"
-					value={formData.lastName}
 					onChange={handleChange}
 					placeholder="Last Name"
 				/>
-				<input
-					name="dateOfBirth"
-					type="date"
-					value={formData.dateOfBirth}
-					onChange={handleChange}
-					placeholder="Date of Birth"
-				/>
+				<label className="label-dateOfBirth" htmlFor="dateOfBirth">
+					Date of Birth
+				</label>
 
 				<Calendar
-					startDate={formData.startDate}
-					handleDateChange={handleDateChange}
+					date={dateOfBirth}
+					handleDateChange={(date) => handleDateChange("dateOfBirth", date)}
+				/>
+				<label className="label-startDate" htmlFor="startDate">
+					Start Date
+				</label>
+
+				<Calendar
+					date={startDate}
+					handleDateChange={(startDate) =>
+						handleDateChange("startDate", startDate)
+					}
 				/>
 
 				<Select
 					options={optionsDepartements}
-					setValue={(value) => handleChange(value)}
+					onChange={(value) => {
+						console.log({ value });
+
+						handleSelectChange("department", value);
+					}}
 				/>
 
-				<input
-					name="street"
-					value={formData.street}
-					onChange={handleChange}
-					placeholder="Street"
-				/>
-				<input
-					name="city"
-					value={formData.city}
-					onChange={handleChange}
-					placeholder="City"
-				/>
-				<select name="state" value={formData.state} onChange={handleChange}>
+				<input name="street" onChange={handleChange} placeholder="Street" />
+				<input name="city" onChange={handleChange} placeholder="City" />
+				<select name="state" onChange={handleChange}>
 					<option value="">Selected State</option>
 					{states.map((state) => (
 						<option key={state.abbreviation} value={state.abbreviation}>
@@ -112,13 +107,7 @@ export const FormEmployee = () => {
 						</option>
 					))}
 				</select>
-				<input
-					name="zipCode"
-					value={formData.zipCode}
-					onChange={handleChange}
-					placeholder="Zip Code"
-					readOnly
-				/>
+				<input name="zipCode" onChange={handleChange} placeholder="Zip Code" />
 				<button type="button" onClick={saveEmployee}>
 					Save Employees
 				</button>

@@ -6,7 +6,6 @@ export  const departments = [
     "Legal"
 ];
 
-
 export const optionsDepartements = departments.map((departement) => ({
     value: departement,
     label: departement

@@ -2,19 +2,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 
-
-function Calendar({ startDate, handleDateChange }) {
+function Calendar({ date, handleDateChange }) {
+	
 	return (
 		<DatePicker
 			showIcon
-			selected={startDate}
-			onChange={(date) => handleDateChange(date)}
-			
+			selected={date || new Date}
+			//onChange={(date) => handleDateChange(date)}
+			onChange={handleDateChange}
+			className="style-datePicker"
+			dateFormat="dd/MM/yyyy"
 		/>
 	);
 }
 Calendar.propTypes = {
-	startDate: PropTypes.instanceOf(Date).isRequired,
+	date: PropTypes.instanceOf(Date).isRequired,
 	handleDateChange: PropTypes.func.isRequired,
 };
 
