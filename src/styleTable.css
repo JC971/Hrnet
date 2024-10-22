@@ -1,0 +1,125 @@
+h2 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 32px;
+	padding: 20px 0 0 0;
+	margin-bottom: 30px;
+}
+
+.table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	border-top: solid gray 1px;
+	border-bottom: solid gray 1px;
+	width: 60%;
+}
+
+.table-row-header {
+	border-collapse: separate;
+	border-spacing: 28px;
+}
+
+
+
+.table-row:nth-child(odd) td {
+    background-color: #f9f9f9;  /* Very light gray */
+}
+
+td {
+	text-align: center;
+	background-color: #ededed;
+	
+}
+
+
+.main-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 60%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.entries-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.search-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.search-input {
+	padding: 8px;
+	width: 200px;
+	padding: 0;
+}
+
+select {
+	padding-left: 8px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	margin-bottom: 0;
+	margin-top: 0;
+
+	height: 40px;
+}
+
+.page-container {
+	border: solid red 2px;
+}
+
+.info-container {
+	display: flex;
+	align-items: baseline;
+	width: 60%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.entries-info {
+	display: flex;
+	width: 80%;
+}
+
+.pagination {
+	display: flex;
+	justify-content: right;
+	padding: 10px;
+	gap: 10px;
+	width: 80%;
+}
+
+.pagination button {
+	padding: 8px 16px;
+	font-size: 16px; 
+	background-color: white; 
+	border: 1px solid #ccc;
+	cursor: pointer; 
+}
+
+.pagination button:disabled {
+	color: #312b2b2a; 
+	cursor: not-allowed; 
+	background-color: #f9f9f9; 
+}
+
+.page-number.active {
+	background-color: #ededed; 
+	font-weight: bold; 
+}
+
+.page-number {
+	transition: background-color 0.3s; 
+}
+
+
+.pagination button:hover:not(:disabled) {
+	background-color: #e0e0e0; 
+}
+

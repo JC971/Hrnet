@@ -6,8 +6,8 @@ function Calendar({ date, handleDateChange }) {
 	
 	return (
 		<DatePicker
-			showIcon
-			selected={date || new Date}
+		
+			selected={date || new Date()}
 			//onChange={(date) => handleDateChange(date)}
 			onChange={handleDateChange}
 			className="style-datePicker"
@@ -16,7 +16,7 @@ function Calendar({ date, handleDateChange }) {
 	);
 }
 Calendar.propTypes = {
-	date: PropTypes.instanceOf(Date).isRequired,
+	date: PropTypes.instanceOf(Date),
 	handleDateChange: PropTypes.func.isRequired,
 };
 

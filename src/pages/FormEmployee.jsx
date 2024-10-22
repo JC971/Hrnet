@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Select from "react-select";
 import Calendar from "../components/Calendar";
 import { optionsDepartements } from "../data/departments";
 import { states } from "../data/states";
@@ -9,9 +8,9 @@ import { NavLink } from "react-router-dom";
 
 export const FormEmployee = () => {
 	const { updateNewEmployee, addEmployee, newEmployee } = useEmployeeStore();
-	const [dateOfBirth, setDateOfBirth] = useState(null);
-	const [startDate, setStartDate] = useState(null);
-	//const [error, setError] = useState('');
+	const [dateOfBirth, setDateOfBirth] = useState(new Date());
+	const [startDate, setStartDate] = useState(new Date());
+	
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -26,6 +25,7 @@ export const FormEmployee = () => {
 	const [showModal, setShowModal] = useState(false);
 
 	const handleDateChange = (field, date) => {
+		console.log(`Rendering date for ${field}:`, date);
 		if (field === "dateOfBirth") {
 			setDateOfBirth(date);
 		} else {
@@ -34,40 +34,45 @@ export const FormEmployee = () => {
 		updateNewEmployee(field, date);
 	};
 
-	// Sauvegarder un nouvel employé dans localStorage
+	
 	const saveEmployee = () => {
-		// TODO check error
-
 		addEmployee(newEmployee);
-		setShowModal(true); //ouverture de la modale après enreg
+		setShowModal(true); 
+	
+
 	};
 
 	const closeModal = () => {
 		setShowModal(false);
 	};
 
-	// TODO ajouter le lien vers la page de la liste
-
 	return (
 		<div className="container">
 			<h1>HRnet</h1>
-			{/*ICI LIEN */}
+
 			<NavLink to="/list" className="nav-link">
-				Tableau des employees
+				View Curent Employees
 			</NavLink>
 
 			<form>
+				<h2>Create Employee</h2>
 				<label className="label-firstName" htmlFor="firstName">
 					First Name
 				</label>
-				<input name="firstName" onChange={handleChange} placeholder="" />
+				<input
+					id="firstName"
+					name="firstName"
+					onChange={handleChange}
+					placeholder=""
+				/>
 				<label className="label-lastName" htmlFor="lastName">
-					Prénom
+					Last Name
 				</label>
 				<input
+					id="lastName"
 					name="lastName"
 					onChange={handleChange}
-					placeholder="Last Name"
+					placeholder=""
 				/>
 				<label className="label-dateOfBirth" htmlFor="dateOfBirth">
 					Date of Birth
@@ -83,33 +88,68 @@ export const FormEmployee = () => {
 
 				<Calendar
 					date={startDate}
-					handleDateChange={(startDate) =>
-						handleDateChange("startDate", startDate)
+					handleDateChange={(date) => handleDateChange("startdate", date)}
+				/>
+				<div className="address-container">
+					<span className="legend">Address</span>
+					<label className="label-street" htmlFor="street">
+						Street
+					</label>
+					<input
+						id="street"
+						name="street"
+						onChange={handleChange}
+						placeholder=""
+					/>
+					<label className="label-street" htmlFor="street">
+						City
+					</label>
+					<input id="city" name="city" onChange={handleChange} placeholder="" />
+					<label className="label-state" htmlFor="state">
+						State
+					</label>
+					<select id="state" name="state" onChange={handleChange}>
+						<option value=""></option>
+						{states.map((state) => (
+							<option key={state.abbreviation} value={state.abbreviation}>
+								{state.name}
+							</option>
+						))}
+					</select>
+					<label className="label-zipCode" htmlFor="zipCode">
+						Zip Code
+					</label>
+					<input
+						id="zipCode"
+						name="zipCode"
+						onChange={handleChange}
+						placeholder=""
+					/>
+				</div>
+				<label htmlFor="departmentSelect" className="label-department">
+					Department
+				</label>
+				<select
+					id="departmentSelect"
+					name="dpt"
+					className="dept-select"
+					onChange={(e) =>
+						handleSelectChange("department", {
+							value: e.target.value,
+							label: e.target.options[e.target.selectedIndex].text,
+						})
 					}
-				/>
-
-				<Select
-					options={optionsDepartements}
-					onChange={(value) => {
-						console.log({ value });
-
-						handleSelectChange("department", value);
-					}}
-				/>
-
-				<input name="street" onChange={handleChange} placeholder="Street" />
-				<input name="city" onChange={handleChange} placeholder="City" />
-				<select name="state" onChange={handleChange}>
-					<option value="">Selected State</option>
-					{states.map((state) => (
-						<option key={state.abbreviation} value={state.abbreviation}>
-							{state.name}
+				>
+					
+					{optionsDepartements.map((option) => (
+						<option key={option.value} value={option.value}>
+							{option.label}
 						</option>
 					))}
 				</select>
-				<input name="zipCode" onChange={handleChange} placeholder="Zip Code" />
-				<button type="button" onClick={saveEmployee}>
-					Save Employees
+
+				<button className="backup" type="button" onClick={saveEmployee}>
+					Save
 				</button>
 			</form>
 			<Modale isOpen={showModal} close={closeModal} />

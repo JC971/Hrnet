@@ -2,11 +2,9 @@
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
-
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
-
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -24,6 +22,16 @@ h1 {
 	line-height: 1.1;
 	text-align: center;
 }
+a.nav-link{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+h2 {
+	text-align: center;
+	font-size: 24px;
+	margin: 0;
+}
 
 .container {
 	display: flex;
@@ -37,38 +45,95 @@ form {
 	flex-direction: column;
 	align-items: left;
 	justify-content: center;
-	border: solid red 3px;
+
 	margin-right: auto;
 	margin-left: auto;
 	width: 290px;
 }
+
 input {
-	margin:10px 8px;
 	height: 20.17px;
 	width: 60%;
-	
 }
-input
-label {
+
+input label {
 	display: block;
 	margin-top: 1rem;
 	margin-bottom: 10px;
-	
 }
 .label-firstName,
 .label-lastName,
 .label-dateOfBirth,
-.label-startDate {
+.label-startDate,
+.label-zipCode,
+.label-state,
+.label-street,
+.label-department {
 	font-size: 16px;
 	font-family: "Times New Roman", Times, serif;
-	margin: 16px 10px;
+	margin: 16px 0px 10px;
+}
 
-	
+#firstName {
+	font-size: 16px;
 }
 
 .address {
+	margin: 10px 2px 0;
+}
+
+.legend {
+	font-size: 16px;
+	color: #000000;
+	font-family: "Times New Roman", Times, serif;
+	margin: 10px 0 10px 20px;
+	position: absolute;
+	top: -25px;
+	background: white;
+	padding-top: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
 	margin-top: 10px;
 }
+
+.address-container {
+	border: solid rgb(66, 47, 47) 1px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	margin-top: 20px;
+}
+
+#state {
+	background: #ededed;
+	margin: 0;
+}
+
+#state option {
+    background: white; /* Remplacez 'lightblue' par la couleur de votre choix */
+    
+}
+
+.backup {
+	border: solid 1px black;
+	font-size: 13px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #f0f0f0;
+	margin-top: 20px;
+}
+
+#departmentSelect {
+	background-color: #ededed;
+}
+.dept-select option {
+    background-color: white; /* Réinitialise la couleur de fond à la valeur par défaut du navigateur */
+}
+
+
+
 
 .modal {
 	position: fixed;
@@ -127,28 +192,32 @@ button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
-.style-datePicker{
-	
+.style-datePicker {
 	text-align: center;
 }
-.react-datepicker{
-	position:relative
+.react-datepicker {
+	position: relative;
 }
-.react-datepicker__calendar-icon{
-	position:absolute;
+.react-datepicker__calendar-icon {
+	position: absolute;
 	right: 65px;
 	top: 5px;
 }
-.nav-link{
+.nav-link {
 	text-align: center;
 	margin: 20px 0;
 	text-decoration: none;
 }
 
-a.nav-link{
+a.nav-link {
 	font-size: 16px;
 }
 
+select {
+	height: 32.8px;
+	width: 258px;
+	margin: 16px 10px;
+}
 
 @media (prefers-color-scheme: light) {
 	:root {
