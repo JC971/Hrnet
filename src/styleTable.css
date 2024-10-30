@@ -100,17 +100,17 @@ select {
 	padding: 10px;
 	gap: 10px;
 	width: 80%;
-	border: solid red 3px;
+	
 }
 
 .pagination button {
 	padding: 8px 16px;
 	font-size: 16px;
 	background-color: white;
-	border: 1px solid #ccc;
+	
 	cursor: pointer;
 	color: #666666;
-	border: solid yellow 2px;
+	
 }
 
 
