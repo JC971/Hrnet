@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { useTable, useSortBy,usePagination } from "react-table";
+import { useTable, useSortBy, usePagination } from "react-table";
 import { useEmployeeStore } from "../store/useEmployeeStore";
 import Pagination from "../Pagination";
+import { Link } from "react-router-dom";
 
 const EmployeeTable = () => {
 	const { employees } = useEmployeeStore();
@@ -24,14 +25,14 @@ const EmployeeTable = () => {
 				Header: "Start Date",
 				accessor: "startDate",
 				Cell: ({ value }) =>
-					value instanceof Date ? value.toLocaleDateString() : value,
+					value ? new Date(value).toLocaleDateString() : "", // Toujours afficher la date
 			},
 			{ Header: "Department", accessor: "department" },
 			{
 				Header: "Date of Birth",
 				accessor: "dateOfBirth",
 				Cell: ({ value }) =>
-					value instanceof Date ? value.toLocaleDateString() : value,
+					value ? new Date(value).toLocaleDateString() : "", // Toujours afficher la date
 			},
 			{ Header: "Street", accessor: "street" },
 			{ Header: "City", accessor: "city" },
@@ -40,6 +41,7 @@ const EmployeeTable = () => {
 		],
 		[]
 	);
+
 
 	const {
 		getTableProps,
@@ -56,17 +58,19 @@ const EmployeeTable = () => {
 			data: filteredEmployees,
 			initialState: { pageIndex: 0, pageSize: 10 },
 		},
-		useSortBy,
-		usePagination
-		);
-	
+		useSortBy, //pour le tri
+		usePagination //pour la pagination
+	);
+
 	const totalEntries = filteredEmployees.length;
 	const currentPageFirstEntryIndex = pageIndex * pageSize + 1;
-	const currentPageLastEntryIndex = Math.min((pageIndex + 1) * pageSize, totalEntries);
-	
+	const currentPageLastEntryIndex = Math.min(
+		(pageIndex + 1) * pageSize,
+		totalEntries
+	);
+
 	const handlePageChange = (page) => {
 		gotoPage(page - 1);
-		
 	};
 
 	return (
@@ -75,7 +79,7 @@ const EmployeeTable = () => {
 			<div className="table-container">
 				<div className="main-container">
 					<div className="entries-container">
-						<label> show</label>
+						<label> Show</label>
 						<select
 							value={pageSize}
 							onChange={(e) => {
@@ -112,10 +116,49 @@ const EmployeeTable = () => {
 								className="table-row-header"
 							>
 								{headerGroup.headers.map((column) => {
-									const { key, ...headerProps } = column.getHeaderProps();
+									const { key, ...headerProps } = column.getHeaderProps(
+										column.getSortByToggleProps()
+									);
 									return (
-										<th key={key} {...headerProps}>
+										<th
+											key={key}
+											{...headerProps}
+											style={{ position: "relative" }}
+											className={`table-header ${
+												column.isSorted ? "sorted" : ""
+											}`}
+										>
 											{column.render("Header")}
+
+											<span
+												className={`sort-arrows ${
+													column.isSorted
+														? column.isSortedDesc
+															? "sorted-desc"
+															: "sorted-asc"
+														: ""
+												}`}
+											>
+												<span
+													className="upSpan"
+													onClick={(e) => {
+														e.stopPropagation();
+														column.toggleSortBy(false);
+													}}
+												>
+													<img src="./src/assets/chevronUp.png" alt="" />
+												</span>
+
+												<span
+													className="dwnSpan"
+													onClick={(e) => {
+														e.stopPropagation();
+														column.toggleSortBy(true);
+													}}
+												>
+													<img src="./src/assets/chevronDown.png" alt="" />
+												</span>
+											</span>
 										</th>
 									);
 								})}
@@ -130,7 +173,13 @@ const EmployeeTable = () => {
 									{row.cells.map((cell) => {
 										const { key, ...cellProps } = cell.getCellProps();
 										return (
-											<td key={key} {...cellProps}>
+											<td
+												key={key}
+												{...cellProps}
+												className={
+													cell.column.isSorted ? `sorted-column-opacity` : ""
+												}
+											>
 												{cell.render("Cell")}
 											</td>
 										);
@@ -145,6 +194,12 @@ const EmployeeTable = () => {
 						Showing {currentPageFirstEntryIndex} to {currentPageLastEntryIndex}{" "}
 						of {totalEntries} entries
 					</div>
+					<div className="home-button">
+						<Link to="/" className="btn-home">
+							Home
+						</Link>
+					</div>
+
 					<Pagination
 						totalPages={Math.ceil(filteredEmployees.length / pageSize)}
 						currentPage={pageIndex + 1}
@@ -157,3 +212,5 @@ const EmployeeTable = () => {
 };
 
 export default EmployeeTable;
+
+

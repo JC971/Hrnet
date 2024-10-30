@@ -11,7 +11,7 @@ h2 {
 	margin-top: 20px;
 	border-top: solid gray 1px;
 	border-bottom: solid gray 1px;
-	width: 60%;
+	width: 70%;
 }
 
 .table-row-header {
@@ -19,18 +19,23 @@ h2 {
 	border-spacing: 28px;
 }
 
-
-
 .table-row:nth-child(odd) td {
-    background-color: #f9f9f9;  /* Very light gray */
+	background-color: #f9f9f9;
 }
 
 td {
 	text-align: center;
 	background-color: #ededed;
+	font-size: 16px;
+	font-family: 'Times New Roman', Times, serif;
+}
+th {
+	height: 50px;
+	text-align: center;
+	min-width: 80px;
+	position: relative;
 	
 }
-
 
 .main-container {
 	display: flex;
@@ -40,6 +45,8 @@ td {
 	width: 60%;
 	margin-right: auto;
 	margin-left: auto;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 16px;
 }
 
 .entries-container {
@@ -66,8 +73,8 @@ select {
 	border: 1px solid #ccc;
 	margin-bottom: 0;
 	margin-top: 0;
-
-	height: 40px;
+	width: 60px;
+	height: 24px;
 }
 
 .page-container {
@@ -93,33 +100,92 @@ select {
 	padding: 10px;
 	gap: 10px;
 	width: 80%;
+	border: solid red 3px;
 }
 
 .pagination button {
 	padding: 8px 16px;
-	font-size: 16px; 
-	background-color: white; 
+	font-size: 16px;
+	background-color: white;
 	border: 1px solid #ccc;
-	cursor: pointer; 
+	cursor: pointer;
+	color: #666666;
+	border: solid yellow 2px;
 }
 
+
 .pagination button:disabled {
-	color: #312b2b2a; 
-	cursor: not-allowed; 
-	background-color: #f9f9f9; 
+	color: #312b2b2a;
+	cursor: not-allowed;
+	background-color: #f9f9f9;
+	border: none;
+	background-color: transparent;
+	color: #333;
+	
 }
 
 .page-number.active {
-	background-color: #ededed; 
-	font-weight: bold; 
+	background-color: #ededed;
+
 }
 
 .page-number {
-	transition: background-color 0.3s; 
+	transition: background-color 0.3s;
+	
 }
-
 
 .pagination button:hover:not(:disabled) {
-	background-color: #e0e0e0; 
+	background-color: #e0e0e0;
 }
 
+.upSpan img,
+.dwnSpan img {
+	width: 14px;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.sort-arrows {
+	right: 0px;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	cursor: pointer;
+	justify-content: center;
+	line-height: 0;
+	position: absolute;
+	top: 14px;
+}
+
+.upSpan.active,
+.dwnSpan.active {
+	opacity: 1;
+}
+.sort-arrows span {
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	height: 12px;
+}
+
+.sorted-column{
+	  background-color:  #2e2c2c4c; 
+}
+
+.sorted-column-opacity {
+  opacity: 0.3; 
+  transition: opacity 0.3s ease; 
+}
+.table-header {
+  
+ border-bottom: solid black 1px;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+}
+
+.btn-home{
+	font-size: 16px;
+	font-family: 'Times New Roman', Times, serif;
+	 
+}

@@ -8,13 +8,11 @@ import { NavLink } from "react-router-dom";
 
 export const FormEmployee = () => {
 	const { updateNewEmployee, addEmployee, newEmployee } = useEmployeeStore();
-	const [dateOfBirth, setDateOfBirth] = useState(new Date());
-	const [startDate, setStartDate] = useState(new Date());
-	
+	const [dateOfBirth, setDateOfBirth] = useState(null);
+	const [startDate, setStartDate] = useState(null);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
-
 		updateNewEmployee(name, value);
 	};
 
@@ -25,21 +23,17 @@ export const FormEmployee = () => {
 	const [showModal, setShowModal] = useState(false);
 
 	const handleDateChange = (field, date) => {
-		console.log(`Rendering date for ${field}:`, date);
 		if (field === "dateOfBirth") {
-			setDateOfBirth(date);
-		} else {
-			setStartDate(date);
+			setDateOfBirth(date ? new Date(date) : null);
+		} else if (field === "startDate") {
+			setStartDate(date ? new Date(date) : null);
 		}
-		updateNewEmployee(field, date);
+		updateNewEmployee(field, date ? new Date(date).toISOString() : "");
 	};
 
-	
 	const saveEmployee = () => {
 		addEmployee(newEmployee);
-		setShowModal(true); 
-	
-
+		setShowModal(true);
 	};
 
 	const closeModal = () => {
@@ -51,7 +45,7 @@ export const FormEmployee = () => {
 			<h1>HRnet</h1>
 
 			<NavLink to="/list" className="nav-link">
-				View Curent Employees
+				View Current Employees
 			</NavLink>
 
 			<form>
@@ -88,7 +82,7 @@ export const FormEmployee = () => {
 
 				<Calendar
 					date={startDate}
-					handleDateChange={(date) => handleDateChange("startdate", date)}
+					handleDateChange={(date) => handleDateChange("startDate", date)} // Correction du nom du champ
 				/>
 				<div className="address-container">
 					<span className="legend">Address</span>
@@ -101,7 +95,7 @@ export const FormEmployee = () => {
 						onChange={handleChange}
 						placeholder=""
 					/>
-					<label className="label-street" htmlFor="street">
+					<label className="label-street" htmlFor="city">
 						City
 					</label>
 					<input id="city" name="city" onChange={handleChange} placeholder="" />
@@ -140,7 +134,6 @@ export const FormEmployee = () => {
 						})
 					}
 				>
-					
 					{optionsDepartements.map((option) => (
 						<option key={option.value} value={option.value}>
 							{option.label}
