@@ -6,6 +6,7 @@ import Modale from "../modale";
 import { useEmployeeStore } from "../store/useEmployeeStore";
 import { NavLink } from "react-router-dom";
 
+
 export const FormEmployee = () => {
 	const { updateNewEmployee, addEmployee, newEmployee } = useEmployeeStore();
 	const [dateOfBirth, setDateOfBirth] = useState(null);
