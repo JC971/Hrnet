@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
 	createBrowserRouter,
 	RouterProvider,
@@ -6,14 +8,10 @@ import {
 import { FormEmployee } from "./pages/FormEmployee";
 import { ListEmployee } from "./pages/ListEmployee";
 
-
-
 const router = createBrowserRouter([
 	{
 	  path: "/",
 		element: <FormEmployee />,
-		
-	  
 	},
 	{
 		path: "/list",

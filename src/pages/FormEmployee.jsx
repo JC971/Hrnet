@@ -2,43 +2,61 @@ import { useState } from "react";
 import Calendar from "../components/Calendar";
 import { optionsDepartements } from "../data/departments";
 import { states } from "../data/states";
-import Modale from "../modale";
 import { useEmployeeStore } from "../store/useEmployeeStore";
 import { NavLink } from "react-router-dom";
 
 
+
+
+
 export const FormEmployee = () => {
-	const { updateNewEmployee, addEmployee, newEmployee } = useEmployeeStore();
+	const { addEmployee } = useEmployeeStore();
+
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [dateOfBirth, setDateOfBirth] = useState(null);
 	const [startDate, setStartDate] = useState(null);
-
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		updateNewEmployee(name, value);
-	};
-
-	const handleSelectChange = (field, value) => {
-		updateNewEmployee(field, value.value);
-	};
-
+	const [street, setStreet] = useState("");
+	const [city, setCity] = useState("");
+	const [state, setState] = useState("");
+	const [zipCode, setZipCode] = useState("");
+	const [department, setDepartment] = useState("");
 	const [showModal, setShowModal] = useState(false);
 
-	const handleDateChange = (field, date) => {
-		if (field === "dateOfBirth") {
-			setDateOfBirth(date ? new Date(date) : null);
-		} else if (field === "startDate") {
-			setStartDate(date ? new Date(date) : null);
-		}
-		updateNewEmployee(field, date ? new Date(date).toISOString() : "");
-	};
+	const openModal = () => setShowModal(true);
+	const closeModal = () => setShowModal(false);
 
-	const saveEmployee = () => {
+	const saveEmployee = (e) => {
+		e.preventDefault();
+
+		const newEmployee = {
+			firstName,
+			lastName,
+			dateOfBirth,
+			startDate,
+			street,
+			city,
+			state,
+			zipCode,
+			department,
+		};
+
 		addEmployee(newEmployee);
-		setShowModal(true);
+
+		openModal();
+		resetForm();
 	};
 
-	const closeModal = () => {
-		setShowModal(false);
+	const resetForm = () => {
+		setFirstName("");
+		setLastName("");
+		setDateOfBirth(null);
+		setStartDate(null);
+		setStreet("");
+		setCity("");
+		setState("");
+		setZipCode("");
+		setDepartment("");
 	};
 
 	return (
@@ -49,61 +67,68 @@ export const FormEmployee = () => {
 				View Current Employees
 			</NavLink>
 
-			<form>
-				<h2>Create Employee</h2>
-				<label className="label-firstName" htmlFor="firstName">
-					First Name
-				</label>
+			<form onSubmit={saveEmployee}>
+				<h2 className="employeeCreation" >Create Employee</h2>
+
+				<label htmlFor="firstName">First Name</label>
 				<input
 					id="firstName"
 					name="firstName"
-					onChange={handleChange}
-					placeholder=""
+					onChange={(e) => setFirstName(e.target.value)}
+					value={firstName}
+					required
 				/>
-				<label className="label-lastName" htmlFor="lastName">
-					Last Name
-				</label>
+
+				<label htmlFor="lastName">Last Name</label>
 				<input
 					id="lastName"
 					name="lastName"
-					onChange={handleChange}
-					placeholder=""
+					onChange={(e) => setLastName(e.target.value)}
+					value={lastName}
+					required
 				/>
-				<label className="label-dateOfBirth" htmlFor="dateOfBirth">
-					Date of Birth
-				</label>
 
+				<label htmlFor="dateOfBirth">Date of Birth</label>
 				<Calendar
 					date={dateOfBirth}
-					handleDateChange={(date) => handleDateChange("dateOfBirth", date)}
+					handleDateChange={(date) =>
+						setDateOfBirth(date ? date.toISOString() : "")
+					}
 				/>
-				<label className="label-startDate" htmlFor="startDate">
-					Start Date
-				</label>
 
+				<label htmlFor="startDate">Start Date</label>
 				<Calendar
 					date={startDate}
-					handleDateChange={(date) => handleDateChange("startDate", date)} // Correction du nom du champ
+					handleDateChange={(date) =>
+						setStartDate(date ? date.toISOString() : "")
+					}
 				/>
+
 				<div className="address-container">
 					<span className="legend">Address</span>
-					<label className="label-street" htmlFor="street">
-						Street
-					</label>
+					<label htmlFor="street">Street</label>
 					<input
 						id="street"
 						name="street"
-						onChange={handleChange}
-						placeholder=""
+						onChange={(e) => setStreet(e.target.value)}
+						value={street}
 					/>
-					<label className="label-street" htmlFor="city">
-						City
-					</label>
-					<input id="city" name="city" onChange={handleChange} placeholder="" />
-					<label className="label-state" htmlFor="state">
-						State
-					</label>
-					<select id="state" name="state" onChange={handleChange}>
+
+					<label htmlFor="city">City</label>
+					<input
+						id="city"
+						name="city"
+						onChange={(e) => setCity(e.target.value)}
+						value={city}
+					/>
+
+					<label htmlFor="state">State</label>
+					<select
+						id="state"
+						name="state"
+						onChange={(e) => setState(e.target.value)}
+						value={state}
+					>
 						<option value=""></option>
 						{states.map((state) => (
 							<option key={state.abbreviation} value={state.abbreviation}>
@@ -111,30 +136,25 @@ export const FormEmployee = () => {
 							</option>
 						))}
 					</select>
-					<label className="label-zipCode" htmlFor="zipCode">
-						Zip Code
-					</label>
+
+					<label htmlFor="zipCode">Zip Code</label>
 					<input
 						id="zipCode"
 						name="zipCode"
-						onChange={handleChange}
-						placeholder=""
+						onChange={(e) => setZipCode(e.target.value)}
+						value={zipCode}
 					/>
 				</div>
-				<label htmlFor="departmentSelect" className="label-department">
-					Department
-				</label>
+
+				<label htmlFor="departmentSelect">Department</label>
 				<select
 					id="departmentSelect"
-					name="dpt"
-					className="dept-select"
-					onChange={(e) =>
-						handleSelectChange("department", {
-							value: e.target.value,
-							label: e.target.options[e.target.selectedIndex].text,
-						})
-					}
+					name="department"
+					onChange={(e) => setDepartment(e.target.value)}
+					value={department}
+					required
 				>
+					<option value="">Select Department</option>
 					{optionsDepartements.map((option) => (
 						<option key={option.value} value={option.value}>
 							{option.label}
@@ -142,11 +162,19 @@ export const FormEmployee = () => {
 					))}
 				</select>
 
-				<button className="backup" type="button" onClick={saveEmployee}>
+				<button className="employButton" type="submit">
 					Save
 				</button>
 			</form>
-			<Modale isOpen={showModal} close={closeModal} />
+
+			{showModal && (
+				<Modale isOpen={showModal} close={closeModal}>
+					<h2>Employee Created Successfully</h2>
+					
+				</Modale>
+			)}
 		</div>
 	);
 };
+
+export default FormEmployee;

@@ -1,5 +1,5 @@
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--font-primary: "Times New Roman", Times, serif;
 	line-height: 1.5;
 	font-weight: 400;
 	color-scheme: light dark;
@@ -14,6 +14,7 @@
 body {
 	min-width: 320px;
 	min-height: 100vh;
+	font-family: var(--font-primary)
 }
 
 h1 {
@@ -22,7 +23,7 @@ h1 {
 	line-height: 1.1;
 	text-align: center;
 }
-a.nav-link{
+a.nav-link {
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -30,7 +31,8 @@ a.nav-link{
 h2 {
 	text-align: center;
 	font-size: 24px;
-	margin: 0;
+	padding-top: 0;
+
 }
 
 .container {
@@ -38,6 +40,7 @@ h2 {
 	flex-direction: column;
 	align-items: left;
 	justify-content: center;
+	
 }
 
 form {
@@ -45,7 +48,6 @@ form {
 	flex-direction: column;
 	align-items: left;
 	justify-content: center;
-
 	margin-right: auto;
 	margin-left: auto;
 	width: 290px;
@@ -67,15 +69,26 @@ input label {
 .label-startDate,
 .label-zipCode,
 .label-state,
-.label-street,
-.label-department {
-	font-size: 16px;
-	font-family: "Times New Roman", Times, serif;
+.label-departmentSelect {
+	font-size: 160px;
 	margin: 16px 0px 10px;
 }
 
-#firstName {
-	font-size: 16px;
+#zipCode,
+#firstName,
+#lastName,
+#dateOfBirth,
+#street,
+#city
+{
+	margin: 10px 0;
+}
+.label-street {
+	margin-top: 100px;
+}
+
+.style-datePicker {
+	margin: 10px 0;
 }
 
 .address {
@@ -93,7 +106,6 @@ input label {
 	padding-top: 0px;
 	padding-left: 5px;
 	padding-right: 5px;
-	margin-top: 10px;
 }
 
 .address-container {
@@ -103,17 +115,20 @@ input label {
 	position: relative;
 	padding-left: 10px;
 	padding-bottom: 10px;
+	padding-top: 20px;
 	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 #state {
 	background: #ededed;
-	margin: 0;
+	margin: 10px 0;
+	width: 257px;
+	height: 33px;
 }
 
 #state option {
-    background: white; /* Remplacez 'lightblue' par la couleur de votre choix */
-    
+	background: white;
 }
 
 .backup {
@@ -127,50 +142,27 @@ input label {
 
 #departmentSelect {
 	background-color: #ededed;
+	width: 257px;
+	height: 33px;
+	margin: 10px 0;
+	font-size: 16px;
 }
+
 .dept-select option {
-    background-color: white; /* Réinitialise la couleur de fond à la valeur par défaut du navigateur */
+	background-color: white;
 }
 
-
-
-
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 1000;
+.employButton{
+	color: #000000;
+	background-color: #f0f0f0;
+	padding: 1px 6px;
+	width: fit-content;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 12px;
+	border: solid 1px gray;
 }
 
-.modal-content {
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: auto;
-	max-width: 90%;
-	z-index: 1001;
-	position: relative;
-	width: 500px;
-	height: 400px;
-}
-
-.modal-content button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	padding: 5px 10px;
-	border: none;
-	background: #ccc;
-	cursor: pointer;
-	border-radius: 5px;
-	color: red;
-}
 
 button {
 	border-radius: 8px;
