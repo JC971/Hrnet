@@ -9,12 +9,13 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	
 }
 
 body {
 	min-width: 320px;
 	min-height: 100vh;
-	font-family: var(--font-primary)
+	font-family: var(--font-primary);
 }
 
 h1 {
@@ -22,6 +23,7 @@ h1 {
 	font-size: 32px;
 	line-height: 1.1;
 	text-align: center;
+	
 }
 a.nav-link {
 	margin-top: 0;
@@ -32,7 +34,6 @@ h2 {
 	text-align: center;
 	font-size: 24px;
 	padding-top: 0;
-
 }
 
 .container {
@@ -40,7 +41,6 @@ h2 {
 	flex-direction: column;
 	align-items: left;
 	justify-content: center;
-	
 }
 
 form {
@@ -79,8 +79,7 @@ input label {
 #lastName,
 #dateOfBirth,
 #street,
-#city
-{
+#city {
 	margin: 10px 0;
 }
 .label-street {
@@ -152,7 +151,7 @@ input label {
 	background-color: white;
 }
 
-.employButton{
+.employButton {
 	color: #000000;
 	background-color: #f0f0f0;
 	padding: 1px 6px;
@@ -163,7 +162,6 @@ input label {
 	border: solid 1px gray;
 }
 
-
 button {
 	border-radius: 8px;
 	border: 1px solid transparent;
@@ -172,7 +170,7 @@ button {
 	font-weight: 500;
 	font-family: inherit;
 	background-color: #1a1a1a;
-	background-color: red;
+
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
@@ -211,6 +209,17 @@ select {
 	margin: 16px 10px;
 }
 
+.modal-title {
+	font-size: 16px;
+	font-family: "Times New Roman", Times, serif;
+	padding: 0;
+	margin-left: 30px;
+	margin-top: 15px;
+	text-align-last: left;
+	margin: 0;
+}
+
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
@@ -223,3 +232,4 @@ select {
 		background-color: #f9f9f9;
 	}
 }
+

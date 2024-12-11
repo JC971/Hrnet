@@ -1,0 +1,44 @@
+
+.custom-modale-style .modale-overlay {
+  background-color: rgba(255, 0, 0, 0.5); /* Arrière-plan semi-transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.title{
+	color: rgb(122, 29, 29);
+}
+/* Styles pour le contenu de la modale */
+.custom-modale-style .modale-content {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 600px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour le titre de la modale */
+.custom-modale-style .modal-title {
+  color: blue;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Styles pour le bouton de fermeture */
+.custom-modale-style .modale-close {
+  font-size: 20px;
+  color: red;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

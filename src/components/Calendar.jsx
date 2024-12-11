@@ -9,7 +9,6 @@ function Calendar({ date, handleDateChange }) {
 		<DatePicker
 		
 			selected={date || new Date()}
-			//onChange={(date) => handleDateChange(date)}
 			onChange={handleDateChange}
 			className="style-datePicker"
 			dateFormat="dd/MM/yyyy"

@@ -4,10 +4,8 @@ import { optionsDepartements } from "../data/departments";
 import { states } from "../data/states";
 import { useEmployeeStore } from "../store/useEmployeeStore";
 import { NavLink } from "react-router-dom";
-
-
-
-
+import Modale from "package-hrnet-modale";
+import "./Modale.css";
 
 export const FormEmployee = () => {
 	const { addEmployee } = useEmployeeStore();
@@ -68,7 +66,7 @@ export const FormEmployee = () => {
 			</NavLink>
 
 			<form onSubmit={saveEmployee}>
-				<h2 className="employeeCreation" >Create Employee</h2>
+				<h2 className="employeeCreation">Create Employee</h2>
 
 				<label htmlFor="firstName">First Name</label>
 				<input
@@ -166,13 +164,40 @@ export const FormEmployee = () => {
 					Save
 				</button>
 			</form>
-
-			{showModal && (
-				<Modale isOpen={showModal} close={closeModal}>
-					<h2>Employee Created Successfully</h2>
-					
-				</Modale>
-			)}
+			<div className="custom-modale-display">
+				{showModal && (
+					<Modale
+						isOpen={showModal}
+						close={closeModal}
+						title="Employee Created!"
+						style={{
+							overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+							container: { height: "50px" },
+							modal: {
+								width: "500px",
+								borderRadius: "10px",
+								position: "relative",
+								height: "50px",
+							},
+							title: {
+								color: "black",
+								fontSize: "16px",
+								textAlign: "left",
+								margin: "0",
+							},
+							closeButton: {
+								fontSize: "20px",
+								color: "white",
+								cursor: "pointer",
+								backgroundColor: "black",
+								height: "30px",
+								width: "30px",
+							},
+						}}
+						closeButtonText="Close"
+					></Modale>
+				)}
+			</div>
 		</div>
 	);
 };

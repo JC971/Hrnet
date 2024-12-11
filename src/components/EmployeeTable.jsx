@@ -25,14 +25,14 @@ const EmployeeTable = () => {
 				Header: "Start Date",
 				accessor: "startDate",
 				Cell: ({ value }) =>
-					value ? new Date(value).toLocaleDateString() : "", // Toujours afficher la date
+					value ? new Date(value).toLocaleDateString() : "", 
 			},
 			{ Header: "Department", accessor: "department" },
 			{
 				Header: "Date of Birth",
 				accessor: "dateOfBirth",
 				Cell: ({ value }) =>
-					value ? new Date(value).toLocaleDateString() : "", // Toujours afficher la date
+					value ? new Date(value).toLocaleDateString() : "", 
 			},
 			{ Header: "Street", accessor: "street" },
 			{ Header: "City", accessor: "city" },
@@ -58,8 +58,8 @@ const EmployeeTable = () => {
 			data: filteredEmployees,
 			initialState: { pageIndex: 0, pageSize: 10 },
 		},
-		useSortBy, //pour le tri
-		usePagination //pour la pagination
+		useSortBy, 
+		usePagination 
 	);
 
 	const totalEntries = filteredEmployees.length;
